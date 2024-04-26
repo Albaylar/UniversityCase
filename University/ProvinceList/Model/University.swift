@@ -29,5 +29,4 @@ struct University: Codable {
     let website: String?
     let email, adress, rector: String?
     var isExpanded: Bool?
-    var isFavorite: Bool?
 }

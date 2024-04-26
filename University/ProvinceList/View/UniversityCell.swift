@@ -26,6 +26,7 @@ final class UniversityCell: UITableViewCell, UniversityDetailCellDelegate {
         tableView.sectionFooterHeight = 10
         tableView.sectionHeaderTopPadding = 0
         tableView.contentInset = .zero
+        tableView.separatorStyle = .none
         tableView.contentInsetAdjustmentBehavior = .never
         tableView.register(UniversityHeaderView.self, forHeaderFooterViewReuseIdentifier: UniversityHeaderView.identifier)
         tableView.register(UniversityDetailCell.self, forCellReuseIdentifier: UniversityDetailCell.identifier)
@@ -64,14 +65,15 @@ extension UniversityCell: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: UniversityDetailCell.identifier, for: indexPath) as! UniversityDetailCell
-        cell.configure(with: datum?.universities?[indexPath.section], dataType: UniversityDataType.allCases[indexPath.row], delegate: self)
-
+            cell.configure(with: datum?.universities?[indexPath.section], dataType: UniversityDataType.allCases[indexPath.row], delegate: self)
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: UniversityHeaderView.identifier) as? UniversityHeaderView
-        header?.configure(with: datum?.universities?[section], hasSingleUniversity: (datum?.universities?.count ?? 0) < 2, delegate: self)
+        guard let university = datum?.universities?[section] else { return nil}
+        let isFav = FavoriteManager.shared.favorites.contains({university.name ?? ""}())
+        header?.configure(with: datum?.universities?[section], hasSingleUniversity: (datum?.universities?.count ?? 0) < 2, isfav: isFav, delegate: self)
         return header
     }
     
@@ -82,15 +84,10 @@ extension UniversityCell: UITableViewDelegate, UITableViewDataSource {
 
 extension UniversityCell: UniversityHeaderViewDelegate {
     
-    
-    func favoriteButtonTapped(for university: University, isFavorite: Bool) {
-        
-        CoreDataManager.shared.saveFavoriteUniversity(name: university.name ?? "")
-    }
-    
     func plusMinusButtonClicked(for university: University) {
         guard let universities = datum?.universities else { return }
         for i in universities.indices {
+            datum?.universities?[i].isExpanded = false
             if universities[i].name == university.name {
                 datum?.universities?[i].isExpanded = university.isExpanded
             }

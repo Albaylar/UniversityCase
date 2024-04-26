@@ -14,10 +14,7 @@ class UniversityViewModel {
     
     var universitiesData: [Datum] = []
     
-    
-    // Function to fetch universities
-    func fetchUniversities(completion: @escaping () -> Void, failure: @escaping (ErrorMessage) -> Void) {
-        // Toplam sayfa sayısını al
+        func fetchUniversities(completion: @escaping () -> Void, failure: @escaping (ErrorMessage) -> Void) {
         let totalPage = 3
         
         for pageNumber in 1...totalPage {
@@ -57,7 +54,6 @@ class UniversityViewModel {
         return universities[index]
     }
     
-    // Function to get the number of universities
     func numberOfUniversities() -> Int {
         return universities.count
     }

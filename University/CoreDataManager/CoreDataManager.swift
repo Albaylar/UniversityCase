@@ -42,22 +42,26 @@ class CoreDataManager {
     }
 
     // Favori üniversiteyi silmek için fonksiyon
-    func deleteFavoriteUniversity(with name: String) {
+    func deleteFavoriteUniversity(name: String) {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Entity")
         fetchRequest.predicate = NSPredicate(format: "name == %@", name)
 
         do {
             let results = try context.fetch(fetchRequest)
-            if let objectToDelete = results.first as? NSManagedObject {
-                context.delete(objectToDelete)
-                try context.save()
+            
+          try results.forEach { result in
+                if let obj = result as? NSManagedObject {
+                    context.delete(obj)
+                    try context.save()
+                }
             }
         } catch let error as NSError {
             print("Deleting error: \(error.localizedDescription), \(error.userInfo)")
         }
     }
-    func fetchFavoriteUniversities() -> [FavoriteUniversity] {
-        var favoriteUniversities: [FavoriteUniversity] = []
+    
+    func fetchFavoriteUniversities() -> [String] {
+        var favoriteUniversities: [String] = []
 
         let fetchRequest: NSFetchRequest<NSManagedObject> = NSFetchRequest(entityName: "Entity")
         fetchRequest.returnsObjectsAsFaults = false
@@ -66,8 +70,7 @@ class CoreDataManager {
             let results = try context.fetch(fetchRequest)
             for result in results {
                 if let name = result.value(forKey: "name") as? String {
-                    let favoriteUniversity = FavoriteUniversity(name: name)
-                    favoriteUniversities.append(favoriteUniversity)
+                    favoriteUniversities.append(name)
                 }
             }
         } catch let error as NSError {

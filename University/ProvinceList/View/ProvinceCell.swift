@@ -15,7 +15,7 @@ protocol ProvinceCellDelegate: AnyObject {
 final class ProvinceCell: UITableViewHeaderFooterView {
     private var university: University?
 
-    private var datum: Datum? // Represents a single university
+    private var datum: Datum?
     private let plusminusButton = UIButton()
     private let universityNameLabel = UILabel()
     private let provinceLabel = UILabel()

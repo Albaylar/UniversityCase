@@ -13,7 +13,8 @@ class FavoritesViewController: UIViewController {
     let backButton = UIButton()
     let titleLabel = UILabel()
     let tableView = UITableView()
-    var favoriteUniversities: [FavoriteUniversity] = [] // Değişiklik burada
+    let noFavoritesLabel = UILabel()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,8 +66,15 @@ class FavoritesViewController: UIViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(20)
-            make.left.right.bottom.equalToSuperview()
+            make.left.right.equalToSuperview().inset(10)
+            make.bottom.equalToSuperview()
         }
+        view.addSubview(noFavoritesLabel)
+        noFavoritesLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
+        }
+        
     }
 
     @objc func backButtonTapped() {
@@ -74,40 +82,55 @@ class FavoritesViewController: UIViewController {
     }
     
     func fetchFavoriteUniversities() {
-        favoriteUniversities = CoreDataManager.shared.fetchFavoriteUniversities()
+        //FavoriteManager.shared.fetchData() 
         tableView.reloadData()
-    }
-
-}
-
-extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return favoriteUniversities.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        let university = favoriteUniversities[indexPath.row]
-        cell.textLabel?.text = university.name
-        return cell
-    }
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Silinecek favori üniversiteyi al
-            let universityToDelete = favoriteUniversities[indexPath.row].name
-            
-            // Core Data'dan sil
-            CoreDataManager.shared.deleteFavoriteUniversity(with: universityToDelete)
-            
-            // Favori üniversiteler dizisinden de sil
-            favoriteUniversities.remove(at: indexPath.row)
-            
-            // TableView'daki satırı güncelle
-            tableView.deleteRows(at: [indexPath], with: .fade)
+        
+        if FavoriteManager.shared.favorites.isEmpty {
+            noFavoritesLabel.text = "Henüz favorilere üniversite eklenmedi."
+            noFavoritesLabel.textColor = .black
+            noFavoritesLabel.textAlignment = .center
+            noFavoritesLabel.font = UIFont.systemFont(ofSize: 16)
+            tableView.backgroundView = noFavoritesLabel
+        } else {
+            tableView.backgroundView = nil
         }
     }
 
 
 }
+
+extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        FavoriteManager.shared.favorites.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let university = FavoriteManager.shared.favorites[indexPath.row]
+        cell.textLabel?.text = university
+        cell.contentView.layer.cornerRadius = 3
+        cell.contentView.layer.borderWidth = 4
+        
+        cell.contentView.layer.borderColor = UIColor.black.cgColor
+        return cell
+    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let universityToDelete = FavoriteManager.shared.favorites[indexPath.row]
+            FavoriteManager.shared.removeFromFavorites(name: universityToDelete)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            if FavoriteManager.shared.favorites.isEmpty {
+                noFavoritesLabel.isHidden = false
+            }
+        }
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
+    }
+
+
+}
+
 
 

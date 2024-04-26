@@ -8,7 +8,6 @@
 import UIKit
 
 protocol UniversityHeaderViewDelegate: AnyObject {
-    func favoriteButtonTapped(for university: University, isFavorite: Bool)
     func plusMinusButtonClicked(for university: University)
     func presentWebViewController(_ viewController: UIViewController)
 }
@@ -21,7 +20,6 @@ class UniversityHeaderView: UITableViewHeaderFooterView {
     let favoriteButton = UIButton()
     let view = UIView()
     var isFavorite: Bool? = false
-  //  var universities : University
     private weak var delegate : UniversityHeaderViewDelegate?
     private let tableView = UITableView()
     private let viewModel = UniversityViewModel()
@@ -44,6 +42,7 @@ class UniversityHeaderView: UITableViewHeaderFooterView {
         super.prepareForReuse()
         university = nil
         universityNameLabel.text = nil
+        plusMinusButton.setImage(UIImage(systemName: "plus"), for: .normal)
     }
 
     private func setupViews() {
@@ -111,27 +110,44 @@ class UniversityHeaderView: UITableViewHeaderFooterView {
     }
 
     private func updatePlusMinusButtonAppearance() {
+        if let name = university?.name,
+           let fax = university?.fax ,
+           let website = university?.website,
+           let adress = university?.adress,
+           let rector = university?.rector,
+           fax != "-",website != "-", adress != "-", rector != "-"{
+            plusMinusButton.isHidden = false
+        } else {
+            plusMinusButton.isHidden = true
+        }
+        
         let imageName = (university?.isExpanded ?? false) ? "minus" : "plus"
         plusMinusButton.setImage(UIImage(systemName: imageName), for: .normal)
     }
+    
     @objc private func favoriteButtonTapped() {
-        guard var university = university else { return }
-        university.isFavorite = !(university.isFavorite ?? false)
+        guard let name = university?.name else { return }
+        FavoriteManager.shared.favorites.contains(where: {$0 == name}) ? FavoriteManager.shared.removeFromFavorites(name: name) : FavoriteManager.shared.addNewFavorite(name: name)
+        isFavorite?.toggle()
         updateFavoriteButtonAppearance()
-        delegate?.favoriteButtonTapped(for: university, isFavorite: isFavorite ?? false)
     }
     
     private func updateFavoriteButtonAppearance() {
-        let imageName = (university?.isFavorite ?? false) ? "heart" : "heart.fill"
+        let imageName = (isFavorite ?? false) ? "heart.fill" : "heart"
         favoriteButton.setImage(UIImage(systemName: imageName), for: .normal)
     }
 
-    func configure(with university: University?, hasSingleUniversity: Bool, delegate: UniversityHeaderViewDelegate) {
+    func configure(with university: University?,
+                   hasSingleUniversity: Bool,
+                   isfav: Bool,
+                   delegate: UniversityHeaderViewDelegate) {
         self.delegate = delegate
         self.university = university
         universityNameLabel.text = university?.name
+        self.isFavorite = isfav
+        updateFavoriteButtonAppearance()
+        updatePlusMinusButtonAppearance()
     }
-    
 }
 
 extension UniversityHeaderView: UITableViewDelegate, UITableViewDataSource {
@@ -140,9 +156,6 @@ extension UniversityHeaderView: UITableViewDelegate, UITableViewDataSource {
         return viewModel.universities.count
     }
 
-    
-
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FooterTableViewCell", for: indexPath) as! UniversityCell
         return cell

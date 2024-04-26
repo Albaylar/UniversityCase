@@ -19,7 +19,7 @@ class UniversityDetailCell: UITableViewCell {
     private var university: University?
     private var dataType = UniversityDataType.phone
     weak var delegate : UniversityDetailCellDelegate?
-
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
@@ -30,27 +30,32 @@ class UniversityDetailCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     func setupUI() {
-        contentView.layer.cornerRadius = 10
-        contentView.layer.borderWidth = 3
-        contentView.layer.borderColor = UIColor.black.cgColor
-        contentView.layer.masksToBounds = true
         
         contentView.addSubview(view)
         view.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(5)
+            make.bottom.equalTo(contentView.snp.bottom).inset(5)
+            make.top.equalToSuperview().offset(5)
+            make.trailing.equalToSuperview()
+            make.leading.equalToSuperview().offset(60)
         }
         
         view.addSubview(viewLabel)
+        view.layer.cornerRadius = 10
+        view.layer.borderWidth = 3
+        view.layer.borderColor = UIColor.black.cgColor
+        
+        view.layer.masksToBounds = true
         viewLabel.numberOfLines = 0
         viewLabel.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview().inset(5)
-            make.centerY.equalToSuperview()
-            make.left.equalToSuperview().inset(5)
-        }
+               make.top.equalToSuperview().offset(5)
+               make.bottom.equalToSuperview().inset(5)
+               make.left.equalToSuperview().inset(10)
+                make.right.equalToSuperview().inset(20)
+           }
         
         setupGestureRecognizer()
     }
-
+    
     func configure(with universityData: University?, dataType: UniversityDataType, delegate : UniversityDetailCellDelegate) {
         self.delegate = delegate
         
@@ -68,29 +73,27 @@ class UniversityDetailCell: UITableViewCell {
         case .rector:
             viewLabel.text = dataTypeString + (university?.rector ?? "")
         }
-       
+        
         self.dataType = dataType
     }
     func setupGestureRecognizer() {
-        if dataType == .website {
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openWebsite))
-            view.addGestureRecognizer(tapGesture)
-        }
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openWebsite))
+        view.addGestureRecognizer(tapGesture)
+        
     }
-
-
+    
+    
     @objc func openWebsite() {
-        guard let websiteURLString = university?.website, let websiteURL = URL(string: websiteURLString) else {
-
-            return
-        }
-
+        guard let websiteURLString = university?.website,
+              let websiteURL = URL(string: websiteURLString),
+              dataType == .website else { return }
+        
         let webViewController = WebViewController(url: websiteURL, universityName: university?.name ?? "")
         webViewController.modalPresentationStyle = .fullScreen
         delegate?.presentWebViewController(webViewController)
     }
-
-
+    
+    
 }
 
 enum UniversityDataType: String, CaseIterable {

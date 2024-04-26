@@ -22,6 +22,7 @@ final class UniversityVC: UIViewController {
         super.viewDidLoad()
         setupUI()
         setupTableView()
+        FavoriteManager.shared.fetchData()
         loadAllUniversities()
     }
     
@@ -47,7 +48,7 @@ final class UniversityVC: UIViewController {
         
         topView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
-            make.right.left.equalToSuperview().inset(5)
+            make.right.left.equalToSuperview().inset(2)
             make.height.equalTo(50)
         }
         
@@ -79,13 +80,11 @@ final class UniversityVC: UIViewController {
         }
         
         view.addSubview(tableView)
-        
         tableView.snp.makeConstraints { make in
             make.top.equalTo(topView.snp.bottom).offset(10)
             make.right.left.equalToSuperview().inset(10)
             make.bottom.equalToSuperview()
         }
-        
     }
    
     func loadAllUniversities() {
@@ -134,6 +133,9 @@ extension UniversityVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
     }
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+           return 5
+       }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         /// Table view must expand as heigh as university count
