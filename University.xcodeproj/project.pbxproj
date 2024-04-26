@@ -28,12 +28,14 @@
 		697969AE2BD994A40048C28D /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697969AD2BD994A40048C28D /* Reusable.swift */; };
 		697969B02BD995690048C28D /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697969AF2BD995690048C28D /* UIView+Extension.swift */; };
 		697969B22BDA795A0048C28D /* UniversityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697969B12BDA795A0048C28D /* UniversityCell.swift */; };
+		69F104232BDBE1660059F0CF /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F104222BDBE1660059F0CF /* SplashViewController.swift */; };
+		69F1042B2BDBE8610059F0CF /* AppContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F104292BDBE8610059F0CF /* AppContainer.swift */; };
+		69F1042D2BDBE88D0059F0CF /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F1042C2BDBE88D0059F0CF /* AppRouter.swift */; };
 		69F899552BBC4B8700D600BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F899542BBC4B8700D600BE /* AppDelegate.swift */; };
 		69F899572BBC4B8700D600BE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F899562BBC4B8700D600BE /* SceneDelegate.swift */; };
 		69F899592BBC4B8700D600BE /* UniversityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F899582BBC4B8700D600BE /* UniversityVC.swift */; };
 		69F8995F2BBC4B8700D600BE /* University.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 69F8995D2BBC4B8700D600BE /* University.xcdatamodeld */; };
 		69F899612BBC4B8A00D600BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69F899602BBC4B8A00D600BE /* Assets.xcassets */; };
-		69F899642BBC4B8A00D600BE /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 69F899632BBC4B8A00D600BE /* Base */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,13 +57,15 @@
 		697969AD2BD994A40048C28D /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 		697969AF2BD995690048C28D /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		697969B12BDA795A0048C28D /* UniversityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityCell.swift; sourceTree = "<group>"; };
+		69F104222BDBE1660059F0CF /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		69F104292BDBE8610059F0CF /* AppContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppContainer.swift; sourceTree = "<group>"; };
+		69F1042C2BDBE88D0059F0CF /* AppRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppRouter.swift; path = ../../../../Downloads/AppRouter.swift; sourceTree = "<group>"; };
 		69F899512BBC4B8700D600BE /* University.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = University.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		69F899542BBC4B8700D600BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		69F899562BBC4B8700D600BE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		69F899582BBC4B8700D600BE /* UniversityVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityVC.swift; sourceTree = "<group>"; };
 		69F8995E2BBC4B8700D600BE /* University.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = University.xcdatamodel; sourceTree = "<group>"; };
 		69F899602BBC4B8A00D600BE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		69F899632BBC4B8A00D600BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		69F899652BBC4B8A00D600BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -91,6 +95,8 @@
 			isa = PBXGroup;
 			children = (
 				69F899542BBC4B8700D600BE /* AppDelegate.swift */,
+				69F104292BDBE8610059F0CF /* AppContainer.swift */,
+				69F1042C2BDBE88D0059F0CF /* AppRouter.swift */,
 				69F899562BBC4B8700D600BE /* SceneDelegate.swift */,
 			);
 			path = App;
@@ -206,37 +212,6 @@
 			path = CoreDataManager;
 			sourceTree = "<group>";
 		};
-		697969982BD80DBF0048C28D /* UniversityList */ = {
-			isa = PBXGroup;
-			children = (
-				6979699B2BD80DDB0048C28D /* Model */,
-				6979699A2BD80DD40048C28D /* ViewModel */,
-				697969992BD80DCD0048C28D /* View */,
-			);
-			path = UniversityList;
-			sourceTree = "<group>";
-		};
-		697969992BD80DCD0048C28D /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		6979699A2BD80DD40048C28D /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		6979699B2BD80DDB0048C28D /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		697969AC2BD994960048C28D /* Helper */ = {
 			isa = PBXGroup;
 			children = (
@@ -244,6 +219,14 @@
 				697969AF2BD995690048C28D /* UIView+Extension.swift */,
 			);
 			path = Helper;
+			sourceTree = "<group>";
+		};
+		69F104212BDBE14E0059F0CF /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				69F104222BDBE1660059F0CF /* SplashViewController.swift */,
+			);
+			path = Splash;
 			sourceTree = "<group>";
 		};
 		69F899482BBC4B8700D600BE = {
@@ -265,16 +248,15 @@
 		69F899532BBC4B8700D600BE /* University */ = {
 			isa = PBXGroup;
 			children = (
+				69F104212BDBE14E0059F0CF /* Splash */,
 				6926534E2BDAFCF90073AFAE /* WebView */,
 				697969AC2BD994960048C28D /* Helper */,
-				697969982BD80DBF0048C28D /* UniversityList */,
 				692747D22BD12C8700E01B14 /* NetworkManager */,
 				692747CC2BD12BC700E01B14 /* ProvinceList */,
 				692747D12BD12C6B00E01B14 /* Favorites */,
 				692747E32BD12F0B00E01B14 /* CoreDataManager */,
 				692747CB2BD12BBB00E01B14 /* App */,
 				69F899602BBC4B8A00D600BE /* Assets.xcassets */,
-				69F899622BBC4B8A00D600BE /* LaunchScreen.storyboard */,
 				69F899652BBC4B8A00D600BE /* Info.plist */,
 			);
 			path = University;
@@ -348,7 +330,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				69F899612BBC4B8A00D600BE /* Assets.xcassets in Resources */,
-				69F899642BBC4B8A00D600BE /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,10 +345,12 @@
 				692653582BDBD2CB0073AFAE /* Entity+CoreDataProperties.swift in Sources */,
 				697969AE2BD994A40048C28D /* Reusable.swift in Sources */,
 				692747CE2BD12BF100E01B14 /* UniversityViewModel.swift in Sources */,
+				69F104232BDBE1660059F0CF /* SplashViewController.swift in Sources */,
 				697969B02BD995690048C28D /* UIView+Extension.swift in Sources */,
 				69F8995F2BBC4B8700D600BE /* University.xcdatamodeld in Sources */,
 				692653502BDAFD440073AFAE /* webViewController.swift in Sources */,
 				697969AB2BD928E20048C28D /* UniversityHeaderView.swift in Sources */,
+				69F1042D2BDBE88D0059F0CF /* AppRouter.swift in Sources */,
 				697969B22BDA795A0048C28D /* UniversityCell.swift in Sources */,
 				69F899552BBC4B8700D600BE /* AppDelegate.swift in Sources */,
 				692747D82BD12D1800E01B14 /* NetworkManager.swift in Sources */,
@@ -375,6 +358,7 @@
 				692747D62BD12CE200E01B14 /* UniversityService.swift in Sources */,
 				69F899572BBC4B8700D600BE /* SceneDelegate.swift in Sources */,
 				692747DA2BD12D4000E01B14 /* NetworkUtility.swift in Sources */,
+				69F1042B2BDBE8610059F0CF /* AppContainer.swift in Sources */,
 				692747DC2BD12D4F00E01B14 /* Error.swift in Sources */,
 				692653542BDBC6720073AFAE /* FavoriteManager.swift in Sources */,
 				692747E72BD15E6A00E01B14 /* ProvinceCell.swift in Sources */,
@@ -385,17 +369,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		69F899622BBC4B8A00D600BE /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				69F899632BBC4B8A00D600BE /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		69F899662BBC4B8A00D600BE /* Debug */ = {
