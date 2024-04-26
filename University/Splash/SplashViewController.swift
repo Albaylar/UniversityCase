@@ -25,7 +25,6 @@ class SplashViewController: UIViewController {
         } failure: { error in
             print(error)
         }
-       
     }
     
 

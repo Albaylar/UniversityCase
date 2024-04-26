@@ -84,16 +84,16 @@ class UniversityDetailCell: UITableViewCell {
     
     
     @objc func openWebsite() {
-        guard let websiteURLString = university?.website,
-              let websiteURL = URL(string: websiteURLString),
-              dataType == .website else { return }
-        
-        let webViewController = WebViewController(url: websiteURL, universityName: university?.name ?? "")
-        webViewController.modalPresentationStyle = .fullScreen
-        delegate?.presentWebViewController(webViewController)
+        if let websiteURLString = university?.website,
+           let websiteURL = URL(string: websiteURLString),
+           dataType == .website  {
+            let webViewController = WebViewController(url: websiteURL, universityName: university?.name ?? "")
+            webViewController.modalPresentationStyle = .fullScreen
+            delegate?.presentWebViewController(webViewController)
+        } else if let phoneNumberString = university?.phone, let url = URL(string: "tel://\(phoneNumberString)"), dataType == .phone {
+            UIApplication.shared.open(url)
+        }
     }
-    
-    
 }
 
 enum UniversityDataType: String, CaseIterable {
