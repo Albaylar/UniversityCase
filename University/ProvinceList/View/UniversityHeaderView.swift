@@ -8,8 +8,9 @@
 import UIKit
 
 protocol UniversityHeaderViewDelegate: AnyObject {
-    func favoriteButtonTapped()
-    func plusMinusButtonClicked(for university : University)
+    func favoriteButtonTapped(for university: University, isFavorite: Bool)
+    func plusMinusButtonClicked(for university: University)
+    func presentWebViewController(_ viewController: UIViewController)
 }
 
 class UniversityHeaderView: UITableViewHeaderFooterView {
@@ -19,10 +20,11 @@ class UniversityHeaderView: UITableViewHeaderFooterView {
     let plusMinusButton = UIButton()
     let favoriteButton = UIButton()
     let view = UIView()
-    var isFavorite: Bool = false
+    var isFavorite: Bool? = false
   //  var universities : University
     private weak var delegate : UniversityHeaderViewDelegate?
     private let tableView = UITableView()
+    private let viewModel = UniversityViewModel()
     
     
     override init(reuseIdentifier: String?) {
@@ -48,12 +50,13 @@ class UniversityHeaderView: UITableViewHeaderFooterView {
         
         contentView.addSubview(view)
         view.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            view.topAnchor.constraint(equalTo: contentView.topAnchor, constant:  10),
-            view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 60),
-            view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
-        ])
+        view.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(10)
+            make.bottom.equalToSuperview()
+            make.leading.equalToSuperview().offset(50)
+            make.trailing.equalToSuperview()
+        }
+
         
         view.layer.cornerRadius = 10
         view.layer.borderWidth = 3
@@ -101,25 +104,25 @@ class UniversityHeaderView: UITableViewHeaderFooterView {
     }
     
     @objc private func plusMinusButtonTapped() {
-        guard var university else { return }
+        guard var university = university else { return }
         university.isExpanded = !(university.isExpanded ?? false)
         updatePlusMinusButtonAppearance()
         delegate?.plusMinusButtonClicked(for: university)
     }
-    
-    @objc private func favoriteButtonTapped() {
-        isFavorite.toggle()
-        updateFavoriteButtonAppearance()
-        delegate?.favoriteButtonTapped()
-    }
-    
+
     private func updatePlusMinusButtonAppearance() {
         let imageName = (university?.isExpanded ?? false) ? "minus" : "plus"
         plusMinusButton.setImage(UIImage(systemName: imageName), for: .normal)
     }
+    @objc private func favoriteButtonTapped() {
+        guard var university = university else { return }
+        university.isFavorite = !(university.isFavorite ?? false)
+        updateFavoriteButtonAppearance()
+        delegate?.favoriteButtonTapped(for: university, isFavorite: isFavorite ?? false)
+    }
     
     private func updateFavoriteButtonAppearance() {
-        let imageName = (university?.isExpanded ?? false) ? "heart.fill" : "heart"
+        let imageName = (university?.isFavorite ?? false) ? "heart" : "heart.fill"
         favoriteButton.setImage(UIImage(systemName: imageName), for: .normal)
     }
 
@@ -133,12 +136,15 @@ class UniversityHeaderView: UITableViewHeaderFooterView {
 
 extension UniversityHeaderView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+       
+        return viewModel.universities.count
     }
+
+    
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FooterTableViewCell", for: indexPath) as! UniversityCell
-        
         return cell
     }
     

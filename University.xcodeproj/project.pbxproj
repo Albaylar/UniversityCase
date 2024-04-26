@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6926534B2BDA9A3D0073AFAE /* UniversityDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6926534A2BDA9A3D0073AFAE /* UniversityDetailCell.swift */; };
+		692653502BDAFD440073AFAE /* webViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6926534F2BDAFD440073AFAE /* webViewController.swift */; };
+		692653522BDB0BE40073AFAE /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692653512BDB0BE40073AFAE /* FavoritesViewController.swift */; };
 		692747C52BCEC32500E01B14 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 692747C42BCEC32500E01B14 /* SnapKit */; };
 		692747C82BCEC33700E01B14 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 692747C72BCEC33700E01B14 /* Alamofire */; };
 		692747CA2BCEC33700E01B14 /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 692747C92BCEC33700E01B14 /* AlamofireDynamic */; };
@@ -33,6 +35,8 @@
 
 /* Begin PBXFileReference section */
 		6926534A2BDA9A3D0073AFAE /* UniversityDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityDetailCell.swift; sourceTree = "<group>"; };
+		6926534F2BDAFD440073AFAE /* webViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = webViewController.swift; sourceTree = "<group>"; };
+		692653512BDB0BE40073AFAE /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		692747CD2BD12BF100E01B14 /* UniversityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityViewModel.swift; sourceTree = "<group>"; };
 		692747CF2BD12C0C00E01B14 /* University.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = University.swift; sourceTree = "<group>"; };
 		692747D52BD12CE200E01B14 /* UniversityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityService.swift; sourceTree = "<group>"; };
@@ -69,6 +73,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6926534E2BDAFCF90073AFAE /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				6926534F2BDAFD440073AFAE /* webViewController.swift */,
+			);
+			path = WebView;
+			sourceTree = "<group>";
+		};
 		692747CB2BD12BBB00E01B14 /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -171,6 +183,7 @@
 		692747E22BD12EF500E01B14 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				692653512BDB0BE40073AFAE /* FavoritesViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -243,6 +256,7 @@
 		69F899532BBC4B8700D600BE /* University */ = {
 			isa = PBXGroup;
 			children = (
+				6926534E2BDAFCF90073AFAE /* WebView */,
 				697969AC2BD994960048C28D /* Helper */,
 				697969982BD80DBF0048C28D /* UniversityList */,
 				692747D22BD12C8700E01B14 /* NetworkManager */,
@@ -341,10 +355,12 @@
 				692747CE2BD12BF100E01B14 /* UniversityViewModel.swift in Sources */,
 				697969B02BD995690048C28D /* UIView+Extension.swift in Sources */,
 				69F8995F2BBC4B8700D600BE /* University.xcdatamodeld in Sources */,
+				692653502BDAFD440073AFAE /* webViewController.swift in Sources */,
 				697969AB2BD928E20048C28D /* UniversityHeaderView.swift in Sources */,
 				697969B22BDA795A0048C28D /* UniversityCell.swift in Sources */,
 				69F899552BBC4B8700D600BE /* AppDelegate.swift in Sources */,
 				692747D82BD12D1800E01B14 /* NetworkManager.swift in Sources */,
+				692653522BDB0BE40073AFAE /* FavoritesViewController.swift in Sources */,
 				692747D62BD12CE200E01B14 /* UniversityService.swift in Sources */,
 				69F899572BBC4B8700D600BE /* SceneDelegate.swift in Sources */,
 				692747DA2BD12D4000E01B14 /* NetworkUtility.swift in Sources */,

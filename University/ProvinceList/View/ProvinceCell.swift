@@ -13,6 +13,8 @@ protocol ProvinceCellDelegate: AnyObject {
 }
 
 final class ProvinceCell: UITableViewHeaderFooterView {
+    private var university: University?
+
     private var datum: Datum? // Represents a single university
     private let plusminusButton = UIButton()
     private let universityNameLabel = UILabel()
@@ -84,6 +86,7 @@ final class ProvinceCell: UITableViewHeaderFooterView {
     func configure(with datum : Datum, delegate: ProvinceCellDelegate) {
         self.delegate = delegate
         self.datum = datum
+     //   universityNameLabel.text = university?.name
         provinceLabel.text = datum.province
         plusminusButton.setImage(UIImage(systemName: (datum.isExpanded ?? false) ? "minus" : "plus"), for: .normal)
     }
@@ -91,12 +94,22 @@ final class ProvinceCell: UITableViewHeaderFooterView {
 }
 
 extension ProvinceCell : UniversityHeaderViewDelegate {
+    func favoriteStatusChanged(for university: University, isFavorite: Bool) {
+        
+    }
+    
+    func favoriteButtonTapped(for university: University, isFavorite: Bool) {
+        
+    }
+    
+    func presentWebViewController(_ viewController: UIViewController) {
+        
+    }
+    
     func plusMinusButtonClicked(for university: University) {
         
     }
-    func favoriteButtonTapped() {
-        
-    }
+ 
     
     
     

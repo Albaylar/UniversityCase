@@ -5,13 +5,16 @@
 //  Created by Furkan Deniz Albaylar on 25.04.2024.
 //
 
+
+
 import UIKit
 
 protocol UniversityCellDelegate: AnyObject {
     func reloadParentTableView(for datum: Datum?)
+    func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?)
 }
 
-final class UniversityCell: UITableViewCell {
+final class UniversityCell: UITableViewCell, UniversityDetailCellDelegate {
     let tableView = UITableView()
     var datum: Datum?
     weak var delegate: UniversityCellDelegate?
@@ -31,7 +34,6 @@ final class UniversityCell: UITableViewCell {
 
         tableView.snp.makeConstraints { make in
             make.top.bottom.right.left.equalToSuperview()
-            
         }
         
     }
@@ -63,6 +65,7 @@ extension UniversityCell: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: UniversityDetailCell.identifier, for: indexPath) as! UniversityDetailCell
         cell.configure(with: datum?.universities?[indexPath.section], dataType: UniversityDataType.allCases[indexPath.row], delegate: self)
+
         return cell
     }
     
@@ -78,18 +81,26 @@ extension UniversityCell: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension UniversityCell: UniversityHeaderViewDelegate {
-    func favoriteButtonTapped() {
+    
+    
+    func favoriteButtonTapped(for university: University, isFavorite: Bool) {
         
+        CoreDataManager.shared.saveFavoriteUniversity(name: university.name ?? "")
     }
     
     func plusMinusButtonClicked(for university: University) {
         guard let universities = datum?.universities else { return }
         for i in universities.indices {
-            datum?.universities?[i].isExpanded = false
             if universities[i].name == university.name {
                 datum?.universities?[i].isExpanded = university.isExpanded
             }
         }
         delegate?.reloadParentTableView(for: datum)
     }
+    
+    func presentWebViewController(_ viewController: UIViewController) {
+        delegate?.present(viewController, animated: true, completion: nil)
+    }
 }
+
+

@@ -68,7 +68,7 @@ final class UniversityVC: UIViewController {
         
         topView.addSubview(favoriteButton)
         favoriteButton.tintColor = .systemRed
-        //favoriteButton.addTarget(self, action: #selector(favoriteButtonTapped), for: .touchUpInside)
+        favoriteButton.addTarget(self, action: #selector(favoriteButtonTapped), for: .touchUpInside)
         favoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
         
         favoriteButton.snp.makeConstraints { make in
@@ -79,6 +79,7 @@ final class UniversityVC: UIViewController {
         }
         
         view.addSubview(tableView)
+        
         tableView.snp.makeConstraints { make in
             make.top.equalTo(topView.snp.bottom).offset(10)
             make.right.left.equalToSuperview().inset(10)
@@ -96,7 +97,9 @@ final class UniversityVC: UIViewController {
         })
     }
     @objc func favoriteButtonTapped(_ sender: UIButton) {
-        
+        let favoritesVC = FavoritesViewController()
+        favoritesVC.modalPresentationStyle = .fullScreen
+        self.present(favoritesVC, animated: true)
     }
     
     
@@ -129,7 +132,7 @@ extension UniversityVC: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 60
+        return 50
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
