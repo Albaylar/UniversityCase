@@ -26,7 +26,7 @@ The University App utilizes modern and preferred technologies and tools:
 
 ## Installation
 
-git clone https://github.com/kullaniciadi/UniversityApp.git
+git clone https://github.com/Albaylar/UniversityApp.git
 cd UniversityApp
 
 
