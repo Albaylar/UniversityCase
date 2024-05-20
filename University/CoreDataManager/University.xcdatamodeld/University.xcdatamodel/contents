@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22757" systemVersion="23B74" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Entity" representedClassName="Entity" syncable="YES">
+        <attribute name="address" optional="YES" attributeType="String"/>
+        <attribute name="fax" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="phone" optional="YES" attributeType="String"/>
+        <attribute name="rector" optional="YES" attributeType="String"/>
+        <attribute name="website" optional="YES" attributeType="String"/>
     </entity>
 </model>

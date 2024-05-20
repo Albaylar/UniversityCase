@@ -1,42 +1,29 @@
 //
-//  UniversityCell.swift
+//  FavoritesCell.swift
 //  University
 //
-//  Created by Furkan Deniz Albaylar on 18.04.2024.
+//  Created by Furkan Deniz Albaylar on 3.05.2024.
 //
 
 import UIKit
-import SnapKit
 
-protocol ProvinceCellDelegate: AnyObject {
-    func plusMinusButtonTapped(for datum: Datum)
-}
 
-final class ProvinceCell: UITableViewHeaderFooterView {
-    private var university: University?
+class FavoritesCell: UITableViewCell {
     
     private var datum: Datum?
+    
     private let plusminusButton = UIButton()
     private let universityNameLabel = UILabel()
     private let provinceLabel = UILabel()
     private weak var delegate: ProvinceCellDelegate?
     
-    
-    override init(reuseIdentifier: String?) {
-        super.init(reuseIdentifier: reuseIdentifier)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
     }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-    }
-    
-    
     private func setupViews() {
         contentView.addSubview(universityNameLabel)
         contentView.addSubview(provinceLabel)
@@ -83,45 +70,13 @@ final class ProvinceCell: UITableViewHeaderFooterView {
         
     }
     
-    func configure(with datum : Datum, delegate: ProvinceCellDelegate) {
+    func configure(with datum : University, delegate: ProvinceCellDelegate) {
         self.delegate = delegate
         self.datum = datum
-        //   universityNameLabel.text = university?.name
-        provinceLabel.text = datum.province
+        universityNameLabel.text = university?.name
         plusminusButton.setImage(UIImage(systemName: (datum.isExpanded ?? false) ? "minus" : "plus"), for: .normal)
     }
     
-}
 
-extension ProvinceCell : UniversityHeaderViewDelegate {
-    func favoriteStatusChanged(for university: University, isFavorite: Bool) {
-        
-    }
-    
-    func favoriteButtonTapped(for university: University, isFavorite: Bool) {
-        
-    }
-    
-    func presentWebViewController(_ viewController: UIViewController) {
-        
-    }
-    
-    func plusMinusButtonClicked(for university: University) {
-        
-    }
-    
-    
-    
     
 }
-
-
-
-
-
-
-
-
-
-
-

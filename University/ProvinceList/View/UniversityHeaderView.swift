@@ -44,7 +44,7 @@ class UniversityHeaderView: UITableViewHeaderFooterView {
         universityNameLabel.text = nil
         plusMinusButton.setImage(UIImage(systemName: "plus"), for: .normal)
     }
-
+    
     private func setupViews() {
         
         contentView.addSubview(view)
@@ -55,13 +55,13 @@ class UniversityHeaderView: UITableViewHeaderFooterView {
             make.leading.equalToSuperview().offset(50)
             make.trailing.equalToSuperview()
         }
-
+        
         
         view.layer.cornerRadius = 10
         view.layer.borderWidth = 3
         view.layer.borderColor = UIColor.black.cgColor
         view.layer.masksToBounds = true
-
+        
         // Plus-Minus Button
         
         view.addSubview(plusMinusButton)
@@ -75,7 +75,7 @@ class UniversityHeaderView: UITableViewHeaderFooterView {
             make.width.equalTo(40)
             
         }
-
+        
         // Favorite Button
         view.addSubview(favoriteButton)
         
@@ -108,7 +108,7 @@ class UniversityHeaderView: UITableViewHeaderFooterView {
         updatePlusMinusButtonAppearance()
         delegate?.plusMinusButtonClicked(for: university)
     }
-
+    
     private func updatePlusMinusButtonAppearance() {
         if let name = university?.name,
            let fax = university?.fax ,
@@ -136,7 +136,7 @@ class UniversityHeaderView: UITableViewHeaderFooterView {
         let imageName = (isFavorite ?? false) ? "heart.fill" : "heart"
         favoriteButton.setImage(UIImage(systemName: imageName), for: .normal)
     }
-
+    
     func configure(with university: University?,
                    hasSingleUniversity: Bool,
                    isfav: Bool,
@@ -152,10 +152,10 @@ class UniversityHeaderView: UITableViewHeaderFooterView {
 
 extension UniversityHeaderView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       
+        
         return viewModel.universities.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FooterTableViewCell", for: indexPath) as! UniversityCell
         return cell

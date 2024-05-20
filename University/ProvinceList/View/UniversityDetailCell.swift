@@ -47,11 +47,11 @@ class UniversityDetailCell: UITableViewCell {
         view.layer.masksToBounds = true
         viewLabel.numberOfLines = 0
         viewLabel.snp.makeConstraints { make in
-               make.top.equalToSuperview().offset(5)
-               make.bottom.equalToSuperview().inset(5)
-               make.left.equalToSuperview().inset(10)
-                make.right.equalToSuperview().inset(20)
-           }
+            make.top.equalToSuperview().offset(5)
+            make.bottom.equalToSuperview().inset(5)
+            make.left.equalToSuperview().inset(10)
+            make.right.equalToSuperview().inset(20)
+        }
         
         setupGestureRecognizer()
     }

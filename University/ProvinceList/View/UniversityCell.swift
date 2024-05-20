@@ -18,7 +18,7 @@ final class UniversityCell: UITableViewCell, UniversityDetailCellDelegate {
     let tableView = UITableView()
     var datum: Datum?
     weak var delegate: UniversityCellDelegate?
-
+    
     func setupUI(){
         tableView.delegate = self
         tableView.dataSource = self
@@ -30,9 +30,9 @@ final class UniversityCell: UITableViewCell, UniversityDetailCellDelegate {
         tableView.contentInsetAdjustmentBehavior = .never
         tableView.register(UniversityHeaderView.self, forHeaderFooterViewReuseIdentifier: UniversityHeaderView.identifier)
         tableView.register(UniversityDetailCell.self, forCellReuseIdentifier: UniversityDetailCell.identifier)
-
+        
         contentView.addSubview(tableView)
-
+        
         tableView.snp.makeConstraints { make in
             make.top.bottom.right.left.equalToSuperview()
         }
@@ -53,7 +53,7 @@ final class UniversityCell: UITableViewCell, UniversityDetailCellDelegate {
         self.delegate = delegate
         tableView.reloadData()
     }
-
+    
 }
 extension UniversityCell: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -65,10 +65,10 @@ extension UniversityCell: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: UniversityDetailCell.identifier, for: indexPath) as! UniversityDetailCell
-            cell.configure(with: datum?.universities?[indexPath.section], dataType: UniversityDataType.allCases[indexPath.row], delegate: self)
+        cell.configure(with: datum?.universities?[indexPath.section], dataType: UniversityDataType.allCases[indexPath.row], delegate: self)
         return cell
     }
-
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: UniversityHeaderView.identifier) as? UniversityHeaderView
         guard let university = datum?.universities?[section] else { return nil}

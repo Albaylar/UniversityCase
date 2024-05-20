@@ -28,6 +28,7 @@
 		697969AE2BD994A40048C28D /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697969AD2BD994A40048C28D /* Reusable.swift */; };
 		697969B02BD995690048C28D /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697969AF2BD995690048C28D /* UIView+Extension.swift */; };
 		697969B22BDA795A0048C28D /* UniversityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697969B12BDA795A0048C28D /* UniversityCell.swift */; };
+		6991BB862BE536DE005A89F2 /* FavoritesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6991BB852BE536DE005A89F2 /* FavoritesCell.swift */; };
 		69F104232BDBE1660059F0CF /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F104222BDBE1660059F0CF /* SplashViewController.swift */; };
 		69F1042B2BDBE8610059F0CF /* AppContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F104292BDBE8610059F0CF /* AppContainer.swift */; };
 		69F1042D2BDBE88D0059F0CF /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F1042C2BDBE88D0059F0CF /* AppRouter.swift */; };
@@ -57,6 +58,7 @@
 		697969AD2BD994A40048C28D /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 		697969AF2BD995690048C28D /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		697969B12BDA795A0048C28D /* UniversityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityCell.swift; sourceTree = "<group>"; };
+		6991BB852BE536DE005A89F2 /* FavoritesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCell.swift; sourceTree = "<group>"; };
 		69F104222BDBE1660059F0CF /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		69F104292BDBE8610059F0CF /* AppContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppContainer.swift; sourceTree = "<group>"; };
 		69F1042C2BDBE88D0059F0CF /* AppRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppRouter.swift; path = ../../../../Downloads/AppRouter.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				692653512BDB0BE40073AFAE /* FavoritesViewController.swift */,
+				6991BB852BE536DE005A89F2 /* FavoritesCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 				69F899572BBC4B8700D600BE /* SceneDelegate.swift in Sources */,
 				692747DA2BD12D4000E01B14 /* NetworkUtility.swift in Sources */,
 				69F1042B2BDBE8610059F0CF /* AppContainer.swift in Sources */,
+				6991BB862BE536DE005A89F2 /* FavoritesCell.swift in Sources */,
 				692747DC2BD12D4F00E01B14 /* Error.swift in Sources */,
 				692653542BDBC6720073AFAE /* FavoriteManager.swift in Sources */,
 				692747E72BD15E6A00E01B14 /* ProvinceCell.swift in Sources */,

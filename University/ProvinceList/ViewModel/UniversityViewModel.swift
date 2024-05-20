@@ -14,7 +14,7 @@ class UniversityViewModel {
     
     var universitiesData: [Datum] = []
     
-        func fetchUniversities(completion: @escaping () -> Void, failure: @escaping (ErrorMessage) -> Void) {
+    func fetchUniversities(completion: @escaping () -> Void, failure: @escaping (ErrorMessage) -> Void) {
         let totalPage = 3
         
         for pageNumber in 1...totalPage {

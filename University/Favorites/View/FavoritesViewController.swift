@@ -63,7 +63,7 @@ class FavoritesViewController: UIViewController {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(FavoritesCell.self, forCellReuseIdentifier: "FavoritesCell")
         tableView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(20)
             make.left.right.equalToSuperview().inset(10)
@@ -105,13 +105,13 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        let university = FavoriteManager.shared.favorites[indexPath.row]
-        cell.textLabel?.text = university
-        cell.contentView.layer.cornerRadius = 3
-        cell.contentView.layer.borderWidth = 4
+        let cell = tableView.dequeueReusableCell(withIdentifier: FavoritesCell.identifier, for: indexPath) as! FavoritesCell
+        _ = FavoriteManager.shared.favorites[indexPath.row]
+//        cell.textLabel?.text = university
+//        cell.contentView.layer.cornerRadius = 3
+//        cell.contentView.layer.borderWidth = 4
         
-        cell.contentView.layer.borderColor = UIColor.black.cgColor
+ //       cell.contentView.layer.borderColor = UIColor.black.cgColor
         return cell
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
