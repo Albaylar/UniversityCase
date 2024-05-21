@@ -17,12 +17,12 @@ extension Entity {
     }
 
     @NSManaged public var address: String?
+    @NSManaged public var email: String?
     @NSManaged public var fax: String?
     @NSManaged public var name: String?
     @NSManaged public var phone: String?
     @NSManaged public var rector: String?
     @NSManaged public var website: String?
-    @NSManaged public var email: String?
 
 }
 
