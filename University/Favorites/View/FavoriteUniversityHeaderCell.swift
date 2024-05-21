@@ -1,18 +1,18 @@
 //
-//  SubCell.swift
+//  FavoriteUniversityHeaderCell.swift
 //  University
 //
-//  Created by Furkan Deniz Albaylar on 24.04.2024.
+//  Created by Furkan Deniz Albaylar on 21.05.2024.
 //
 
 import UIKit
 
-protocol UniversityHeaderViewDelegate: AnyObject {
+protocol FavoriteUniversityHeaderCellDelegate: AnyObject {
     func plusMinusButtonClicked(for university: University)
-    func presentWebViewController(_ viewController: UIViewController)
+    func updateTableView()
 }
 
-class UniversityHeaderView: UITableViewHeaderFooterView {
+class FavoriteUniversityHeaderCell: UITableViewHeaderFooterView {
     
     var university: University?
     let universityNameLabel = UILabel()
@@ -20,7 +20,7 @@ class UniversityHeaderView: UITableViewHeaderFooterView {
     let favoriteButton = UIButton()
     let view = UIView()
     var isFavorite: Bool? = false
-    private weak var delegate : UniversityHeaderViewDelegate?
+    private weak var delegate : FavoriteUniversityHeaderCellDelegate?
     private let tableView = UITableView()
     private let viewModel = UniversityViewModel()
     
@@ -50,9 +50,9 @@ class UniversityHeaderView: UITableViewHeaderFooterView {
         contentView.addSubview(view)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(10)
+            make.top.equalToSuperview()
             make.bottom.equalToSuperview()
-            make.leading.equalToSuperview().offset(50)
+            make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview()
         }
         
@@ -128,9 +128,10 @@ class UniversityHeaderView: UITableViewHeaderFooterView {
     @objc private func favoriteButtonTapped() {
         guard let university = university ,
               let name = university.name else { return }
+        FavoriteManager.shared.favorites.contains(where: {$0.name == name}) ? FavoriteManager.shared.removeFromFavorites(university: university ) : FavoriteManager.shared.addNewFavorite(university: university)
         isFavorite?.toggle()
-        isFavorite ?? false ? FavoriteManager.shared.addNewFavorite(university: university) : FavoriteManager.shared.removeFromFavorites(university: university )          
         updateFavoriteButtonAppearance()
+        delegate?.updateTableView()
     }
     
     private func updateFavoriteButtonAppearance() {
@@ -141,7 +142,7 @@ class UniversityHeaderView: UITableViewHeaderFooterView {
     func configure(with university: University?,
                    hasSingleUniversity: Bool,
                    isfav: Bool,
-                   delegate: UniversityHeaderViewDelegate) {
+                   delegate: FavoriteUniversityHeaderCellDelegate) {
         self.delegate = delegate
         self.university = university
         universityNameLabel.text = university?.name
@@ -151,18 +152,19 @@ class UniversityHeaderView: UITableViewHeaderFooterView {
     }
 }
 
-extension UniversityHeaderView: UITableViewDelegate, UITableViewDataSource {
+extension FavoriteUniversityHeaderCell: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.universities.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FooterTableViewCell", for: indexPath) as! UniversityCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FavoritesCell", for: indexPath) as! FavoritesCell
         return cell
     }
     
     
 }
+
 
 
 

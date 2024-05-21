@@ -25,6 +25,10 @@ final class UniversityVC: UIViewController {
         FavoriteManager.shared.fetchData()
         loadAllUniversities()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
     
     func setupTableView(){
         tableView.delegate = self

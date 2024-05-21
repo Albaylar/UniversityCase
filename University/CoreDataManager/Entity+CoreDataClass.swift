@@ -2,7 +2,7 @@
 //  Entity+CoreDataClass.swift
 //  University
 //
-//  Created by Furkan Deniz Albaylar on 26.04.2024.
+//  Created by Furkan Deniz Albaylar on 21.05.2024.
 //
 //
 

@@ -9,7 +9,7 @@ import Foundation
 
 final class FavoriteManager {
     static let shared = FavoriteManager()
-    var favorites: [String] = []
+    var favorites: [University] = []
     
     private init() { }
     
@@ -17,13 +17,15 @@ final class FavoriteManager {
         favorites = CoreDataManager.shared.fetchFavoriteUniversities()
     }
     
-    func addNewFavorite(name: String) {
-        CoreDataManager.shared.saveFavoriteUniversity(name: name)
-        favorites.append(name)
+    func addNewFavorite(university: University) {
+        CoreDataManager.shared.saveFavoriteUniversity(university: university)
+        favorites.append(university)
     }
     
-    func removeFromFavorites(name: String) {
-        CoreDataManager.shared.deleteFavoriteUniversity(name: name)
-        favorites.removeAll(where: {$0 == name})
+    func removeFromFavorites(university: University) {
+        guard let universityName = university.name else { return }
+        CoreDataManager.shared.deleteFavoriteUniversity(name: universityName)
+        favorites.removeAll(where: {$0.name == universityName})
     }
+  
 }

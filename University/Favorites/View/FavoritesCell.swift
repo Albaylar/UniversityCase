@@ -11,11 +11,10 @@ import UIKit
 class FavoritesCell: UITableViewCell {
     
     private var datum: Datum?
+    private var university: University?
     
     private let plusminusButton = UIButton()
-    private let universityNameLabel = UILabel()
-    private let provinceLabel = UILabel()
-    private weak var delegate: ProvinceCellDelegate?
+    private var universityNameLabel = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -26,7 +25,6 @@ class FavoritesCell: UITableViewCell {
     }
     private func setupViews() {
         contentView.addSubview(universityNameLabel)
-        contentView.addSubview(provinceLabel)
         contentView.addSubview(plusminusButton)
         plusminusButton.addTarget(self, action: #selector(plusMinusButtonTapped), for: .touchUpInside)
         
@@ -42,10 +40,11 @@ class FavoritesCell: UITableViewCell {
             make.width.equalTo(50)
         }
         
-        provinceLabel.snp.makeConstraints { make in
+        universityNameLabel.snp.makeConstraints { make in
             make.top.equalTo(universityNameLabel.snp.bottom).offset(4)
             make.left.equalTo(plusminusButton.snp.right).offset(16)
             make.bottom.equalToSuperview().offset(-10)
+            make.height.equalTo(50)
         }
         
         updatePlusMinusButtonAppearance()
@@ -59,7 +58,7 @@ class FavoritesCell: UITableViewCell {
         updatePlusMinusButtonAppearance()
         guard var datum else {  return }
         datum.isExpanded = isExpanded
-        delegate?.plusMinusButtonTapped(for: datum)
+        
         
     }
     
@@ -70,13 +69,9 @@ class FavoritesCell: UITableViewCell {
         
     }
     
-    func configure(with datum : University, delegate: ProvinceCellDelegate) {
-        self.delegate = delegate
-        self.datum = datum
-        universityNameLabel.text = university?.name
-        plusminusButton.setImage(UIImage(systemName: (datum.isExpanded ?? false) ? "minus" : "plus"), for: .normal)
+    func configure(university: University) {
+        self.university = university
+        universityNameLabel.text = university.name
+        
     }
-    
-
-    
 }

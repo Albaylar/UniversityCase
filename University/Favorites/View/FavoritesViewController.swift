@@ -9,7 +9,8 @@
 import UIKit
 import CoreData
 
-class FavoritesViewController: UIViewController {
+final class FavoritesViewController: UIViewController {
+    
     let backButton = UIButton()
     let titleLabel = UILabel()
     let tableView = UITableView()
@@ -19,11 +20,17 @@ class FavoritesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        fetchFavoriteUniversities()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
     }
 
     func setupUI() {
         view.backgroundColor = .white
+        tableView.register(UniversityHeaderView.self, forHeaderFooterViewReuseIdentifier: UniversityHeaderView.identifier)
+        tableView.register(UniversityDetailCell.self, forCellReuseIdentifier: UniversityDetailCell.identifier)
+
 
         let topView = UIView()
         topView.backgroundColor = .white
@@ -64,6 +71,7 @@ class FavoritesViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(FavoritesCell.self, forCellReuseIdentifier: "FavoritesCell")
+        tableView.register(FavoriteUniversityHeaderCell.self, forHeaderFooterViewReuseIdentifier: FavoriteUniversityHeaderCell.identifier)
         tableView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(20)
             make.left.right.equalToSuperview().inset(10)
@@ -95,42 +103,70 @@ class FavoritesViewController: UIViewController {
             tableView.backgroundView = nil
         }
     }
-
-
 }
 
 extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        (FavoriteManager.shared.favorites[section].isExpanded ?? false) ? UniversityDataType.allCases.count : 0
+            }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
         FavoriteManager.shared.favorites.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: FavoritesCell.identifier, for: indexPath) as! FavoritesCell
-        _ = FavoriteManager.shared.favorites[indexPath.row]
-//        cell.textLabel?.text = university
-//        cell.contentView.layer.cornerRadius = 3
-//        cell.contentView.layer.borderWidth = 4
-        
- //       cell.contentView.layer.borderColor = UIColor.black.cgColor
+        let cell = tableView.dequeueReusableCell(withIdentifier: UniversityDetailCell.identifier, for: indexPath) as! UniversityDetailCell
+        cell.configure(with: FavoriteManager.shared.favorites[indexPath.section], dataType: UniversityDataType.allCases[indexPath.row], delegate: self)
         return cell
     }
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let universityToDelete = FavoriteManager.shared.favorites[indexPath.row]
-            FavoriteManager.shared.removeFromFavorites(name: universityToDelete)
+            FavoriteManager.shared.removeFromFavorites(university: universityToDelete)
             tableView.deleteRows(at: [indexPath], with: .fade)
             if FavoriteManager.shared.favorites.isEmpty {
                 noFavoritesLabel.isHidden = false
             }
         }
     }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: FavoriteUniversityHeaderCell.identifier) as! FavoriteUniversityHeaderCell
+       let university = FavoriteManager.shared.favorites[section]
+        header.configure(with: university, hasSingleUniversity: true , isfav: true, delegate: self)
+        return header
+
+    }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
     }
-
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
+    }
 
 }
 
+extension FavoritesViewController: FavoriteUniversityHeaderCellDelegate {
+    func plusMinusButtonClicked(for university: University) {
+        for i in FavoriteManager.shared.favorites.indices {
+            FavoriteManager.shared.favorites[i].isExpanded = false
+            if FavoriteManager.shared.favorites[i].name == university.name {
+                FavoriteManager.shared.favorites[i].isExpanded = university.isExpanded
+            }
+        }
+        tableView.reloadData()
+    }
+    
+    func updateTableView() {
+        tableView.reloadData()
+    }
+    
+}
 
-
+extension FavoritesViewController: UniversityDetailCellDelegate {
+    func presentWebViewController(_ viewController: UIViewController) {
+        
+    }
+}

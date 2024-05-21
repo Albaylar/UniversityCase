@@ -72,7 +72,10 @@ extension UniversityCell: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: UniversityHeaderView.identifier) as? UniversityHeaderView
         guard let university = datum?.universities?[section] else { return nil}
-        let isFav = FavoriteManager.shared.favorites.contains({university.name ?? ""}())
+        var isFav: Bool = false
+        if let _ = FavoriteManager.shared.favorites.firstIndex(where: {$0.name == university.name}){
+            isFav = true
+        }
         header?.configure(with: datum?.universities?[section], hasSingleUniversity: (datum?.universities?.count ?? 0) < 2, isfav: isFav, delegate: self)
         return header
     }
