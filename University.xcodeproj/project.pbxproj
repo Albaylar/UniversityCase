@@ -44,7 +44,7 @@
 		69E81BD82BFCDD6900BE6537 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69E81BB12BFCDD6900BE6537 /* Assets.xcassets */; };
 		69E81BDA2BFCDD6900BE6537 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69E81BB42BFCDD6900BE6537 /* Main.storyboard */; };
 		69E81BDC2BFCDE5600BE6537 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E81BDB2BFCDE5600BE6537 /* AppRouter.swift */; };
-		69E81BDF2BFCDF9400BE6537 /* University.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 69E81BDD2BFCDF9400BE6537 /* University.xcdatamodeld */; };
+		69E81BE82BFCE07900BE6537 /* University.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 69E81BE62BFCE07900BE6537 /* University.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,7 +83,7 @@
 		69E81BB22BFCDD6900BE6537 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69E81BB32BFCDD6900BE6537 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		69E81BDB2BFCDE5600BE6537 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
-		69E81BDE2BFCDF9400BE6537 /* University.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = University.xcdatamodel; sourceTree = "<group>"; };
+		69E81BE72BFCE07900BE6537 /* University.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = University.xcdatamodel; sourceTree = "<group>"; };
 		69F899512BBC4B8700D600BE /* University.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = University.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -119,7 +119,6 @@
 				69E81B842BFCDD6900BE6537 /* Entity+CoreDataClass.swift */,
 				69E81B852BFCDD6900BE6537 /* Entity+CoreDataProperties.swift */,
 				69E81B862BFCDD6900BE6537 /* FavoriteManager.swift */,
-				69E81BDD2BFCDF9400BE6537 /* University.xcdatamodeld */,
 			);
 			path = CoreDataManager;
 			sourceTree = "<group>";
@@ -283,6 +282,7 @@
 				69E81BB02BFCDD6900BE6537 /* WebView */,
 				69E81BB12BFCDD6900BE6537 /* Assets.xcassets */,
 				69E81BB22BFCDD6900BE6537 /* Info.plist */,
+				69E81BE62BFCE07900BE6537 /* University.xcdatamodeld */,
 				69E81BB42BFCDD6900BE6537 /* Main.storyboard */,
 			);
 			path = University;
@@ -413,7 +413,7 @@
 				69E81BD02BFCDD6900BE6537 /* UniversityViewModel.swift in Sources */,
 				69E81BDC2BFCDE5600BE6537 /* AppRouter.swift in Sources */,
 				69E81BCC2BFCDD6900BE6537 /* UniversityCell.swift in Sources */,
-				69E81BDF2BFCDF9400BE6537 /* University.xcdatamodeld in Sources */,
+				69E81BE82BFCE07900BE6537 /* University.xcdatamodeld in Sources */,
 				69E81BBB2BFCDD6900BE6537 /* CoreDataManager.swift in Sources */,
 				69E81BBA2BFCDD6900BE6537 /* SceneDelegate.swift in Sources */,
 			);
@@ -669,14 +669,14 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		69E81BDD2BFCDF9400BE6537 /* University.xcdatamodeld */ = {
+		69E81BE62BFCE07900BE6537 /* University.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				69E81BDE2BFCDF9400BE6537 /* University.xcdatamodel */,
+				69E81BE72BFCE07900BE6537 /* University.xcdatamodel */,
 			);
-			currentVersion = 69E81BDE2BFCDF9400BE6537 /* University.xcdatamodel */;
+			currentVersion = 69E81BE72BFCE07900BE6537 /* University.xcdatamodel */;
 			name = University.xcdatamodeld;
-			path = /Users/furkandenizalbaylar/Desktop/University/University/CoreDataManager/University.xcdatamodeld;
+			path = /Users/furkandenizalbaylar/Desktop/University/University/University.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
